@@ -18,7 +18,7 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
-                ->name('login')->middleware('recaptcha');
+                ->name('login')->middleware('recaptcha:0.8');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

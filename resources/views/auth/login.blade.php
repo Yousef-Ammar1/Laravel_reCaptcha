@@ -2,16 +2,12 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}" x-data="{ recaptcha_token: null }"
-        x-on:submit.prevent="
-        grecaptcha.ready(() => {
-            grecaptcha.execute('{{ config('recaptcha.key') }}', {action: 'submit'}).then((token) => {
-                recaptcha_token = token;
-                $el.submit();
-            });
-        });
-    ">
+    <form method="POST"
+    action="{{ route('login') }}"
+    @recaptcha('submit')
+>
         @csrf
+
 
         <input type="hidden" name="recaptcha_token" x-bind:value="recaptcha_token" />
         <!-- Email Address -->
